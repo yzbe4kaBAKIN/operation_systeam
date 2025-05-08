@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Области применения операционных систем</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-bottom: 40px;
+            font-weight: normal;
+        }
+        .chart-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .chart-wrapper {
+            height: 500px;
+            position: relative;
+            margin: 0 auto;
+            max-width: 700px;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .note {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Области применения операционных систем</h1>
+    <h2>Сравнение производительности ОС по областям</h2>
+    
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <canvas id="radar-chart"></canvas>
+        </div>
+        
+        <div class="legend" id="os-legend"></div>
+        
+        <p class="note">*Шкала от 0 до 100, где 100 — максимальная эффективность для данной области</p>
+    </div>
+    
+    <footer>
+        <p>© 2025 Области применения операционных систем. Все данные актуальны на май 2025.</p>
+    </footer>
+
+    <script>
+        // Данные для радарной диаграммы
+        const radarData = {
+            labels: ['Повседневное использование', 'Игры', 'Работа/Офис', 'Программирование', 'Графика/Видео', 'Серверы', 'Образование'],
+            datasets: [
+                {
+                    label: 'Windows',
+                    data: [85, 95, 90, 80, 85, 70, 80],
+                    backgroundColor: 'rgba(0, 120, 215, 0.2)',
+                    borderColor: 'rgba(0, 120, 215, 1)',
+                    pointBackgroundColor: 'rgba(0, 120, 215, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(0, 120, 215, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'macOS',
+                    data: [90, 50, 85, 75, 95, 60, 85],
+                    backgroundColor: 'rgba(160, 160, 160, 0.2)',
+                    borderColor: 'rgba(160, 160, 160, 1)',
+                    pointBackgroundColor: 'rgba(160, 160, 160, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(160, 160, 160, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Linux',
+                    data: [70, 40, 75, 95, 80, 100, 75],
+                    backgroundColor: 'rgba(247, 197, 71, 0.2)',
+                    borderColor: 'rgba(247, 197, 71, 1)',
+                    pointBackgroundColor: 'rgba(247, 197, 71, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(247, 197, 71, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Android',
+                    data: [80, 75, 65, 70, 75, 40, 85],
+                    backgroundColor: 'rgba(61, 220, 132, 0.2)',
+                    borderColor: 'rgba(61, 220, 132, 1)',
+                    pointBackgroundColor: 'rgba(61, 220, 132, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(61, 220, 132, 1)',
+                    borderWidth: 2
+                },
+                {
+                    label: 'iOS',
+                    data: [85, 70, 75, 65, 80, 35, 90],
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    borderColor: 'rgba(0, 0, 0, 0.8)',
+                    pointBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(0, 0, 0, 0.8)',
+                    borderWidth: 2
+                }
+            ]
+        };
+
+        // Опции для диаграммы
+        const radarOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.raw}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true,
+                        color: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    ticks: {
+                        stepSize: 25,
+                        backdropColor: 'transparent',
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                    },
+                    pointLabels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            },
+            elements: {
+                line: {
+                    tension: 0.1
+                }
+            }
+        };
+
+        // Создание радарной диаграммы
+        const radarChart = new Chart(
+            document.getElementById('radar-chart'),
+            {
+                type: 'radar',
+                data: radarData,
+                options: radarOptions
+            }
+        );
+
+        // Создание легенды
+        const osLegend = document.getElementById('os-legend');
+        const colors = [
+            'rgba(0, 120, 215, 1)',     // Windows
+            'rgba(160, 160, 160, 1)',    // macOS
+            'rgba(247, 197, 71, 1)',     // Linux
+            'rgba(61, 220, 132, 1)',     // Android
+            'rgba(0, 0, 0, 0.8)'         // iOS
+        ];
+        
+        radarData.datasets.forEach((dataset, index) => {
+            const item = document.createElement('div');
+            item.className = 'legend-item';
+            
+            const colorBox = document.createElement('div');
+            colorBox.className = 'legend-color';
+            colorBox.style.backgroundColor = colors[index];
+            
+            const text = document.createElement('span');
+            text.textContent = dataset.label;
+            
+            item.appendChild(colorBox);
+            item.appendChild(text);
+            osLegend.appendChild(item);
+        });
+    </script>
+</body>
+</html>

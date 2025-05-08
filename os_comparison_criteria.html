@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ключевые критерии выбора ОС</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-bottom: 30px;
+            font-weight: normal;
+        }
+        .chart-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        .chart-wrapper {
+            height: 400px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+        }
+        .note {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        thead {
+            background-color: #eee;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        h3 {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ключевые критерии выбора ОС</h1>
+    <h2>Сравнение по ключевым критериям</h2>
+    
+    <div class="chart-container">
+        <div class="chart-wrapper">
+            <canvas id="bar-chart"></canvas>
+        </div>
+        
+        <div class="legend" id="os-legend"></div>
+        
+        <p class="note">*Чем выше значение, тем лучше показатель (для стоимости: 100 = бесплатно, 0 = очень дорого)</p>
+    </div>
+    
+    <h3>Срок поддержки операционных систем</h3>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Операционная система</th>
+                <th>Срок поддержки</th>
+                <th>Примечание</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>iOS/macOS</td>
+                <td>До 7 лет</td>
+                <td>Новые функции и исправления</td>
+            </tr>
+            <tr>
+                <td>Android</td>
+                <td>Зависит от производителя</td>
+                <td>От 2 до 5 лет в зависимости от бренда</td>
+            </tr>
+            <tr>
+                <td>Windows</td>
+                <td>10 лет</td>
+                <td>Windows 10 поддерживается до 2025 г.</td>
+            </tr>
+            <tr>
+                <td>Linux</td>
+                <td>5-10+ лет</td>
+                <td>LTS 5 лет, Red Hat Enterprise Linux 10+ лет</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <footer>
+        <p>© 2025 Ключевые критерии выбора ОС. Все данные актуальны на май 2025.</p>
+    </footer>
+
+    <script>
+        // Данные для горизонтальной столбчатой диаграммы
+        const barData = {
+            labels: ['Безопасность', 'Срок поддержки (годы)', 'Удобство для новичков', 'Кастомизация', 'Стоимость'],
+            datasets: [
+                {
+                    label: 'Windows',
+                    data: [65, 10, 80, 40, 60],
+                    backgroundColor: 'rgba(0, 120, 215, 0.8)',
+                    borderColor: 'rgba(0, 120, 215, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'macOS',
+                    data: [80, 7, 85, 50, 40],
+                    backgroundColor: 'rgba(160, 160, 160, 0.8)',
+                    borderColor: 'rgba(160, 160, 160, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Linux',
+                    data: [85, 10, 50, 95, 100],
+                    backgroundColor: 'rgba(247, 197, 71, 0.8)',
+                    borderColor: 'rgba(247, 197, 71, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Android',
+                    data: [60, 4, 75, 80, 80],
+                    backgroundColor: 'rgba(61, 220, 132, 0.8)',
+                    borderColor: 'rgba(61, 220, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'iOS',
+                    data: [90, 7, 95, 30, 35],
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    borderColor: 'rgba(0, 0, 0, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Опции для диаграммы
+        const barOptions = {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        callback: function(value) {
+                            return value + '';
+                        }
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+        };
+
+        // Создание горизонтальной столбчатой диаграммы
+        const barChart = new Chart(
+            document.getElementById('bar-chart'),
+            {
+                type: 'bar',
+                data: barData,
+                options: barOptions
+            }
+        );
+
+        // Создание легенды
+        const osLegend = document.getElementById('os-legend');
+        const colors = [
+            'rgba(0, 120, 215, 0.8)',    // Windows
+            'rgba(160, 160, 160, 0.8)',   // macOS
+            'rgba(247, 197, 71, 0.8)',    // Linux
+            'rgba(61, 220, 132, 0.8)',    // Android
+            'rgba(0, 0, 0, 0.8)'          // iOS
+        ];
+        
+        barData.datasets.forEach((dataset, index) => {
+            const item = document.createElement('div');
+            item.className = 'legend-item';
+            
+            const colorBox = document.createElement('div');
+            colorBox.className = 'legend-color';
+            colorBox.style.backgroundColor = colors[index];
+            
+            const text = document.createElement('span');
+            text.textContent = dataset.label;
+            
+            item.appendChild(colorBox);
+            item.appendChild(text);
+            osLegend.appendChild(item);
+        });
+    </script>
+</body>
+</html>
