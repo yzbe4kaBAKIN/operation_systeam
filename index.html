@@ -457,6 +457,376 @@
                 options: previewOptions3
             }
         );
+
+
+        
+Первый билет
+
+const goods = {
+    apple:100,
+    orange:100,
+    tomato:100,
+    cucumber:800
+};
+let maxPrice = 0;
+let nameOfMaxPrice = 0;
+
+for (let [name, price] of Object.entries(goods)) {
+    if (price >= maxPrice) {
+        maxPrice = price;
+        nameOfMaxPrice = name;
+    }
+}
+console.log(nameOfMaxPrice);
+
+Второй билет
+const testFunction = (strArray) => {
+  return lenghtArray = strArray.map(item => item.length);
+}
+testFunction(["три", "дв", "семь"]);
+
+
+4 БИЛЕТ
+
+let objectTest = {
+    one:"слово",
+    two:2,
+    three:3,
+    four:4,
+    five:5
+};
+let newArray = [];
+for (let i in objectTest) {
+    if(typeof(objectTest[i]) === "number" ) {
+        newArray.push(objectTest[i]);
+    }
+}
+console.log(newArray);
+
+
+
+
+
+
+Пятый билет
+let arrayNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,-10,-6];
+let arrayNumOfEvenNumbers = [];
+for (let key = 0; key < arrayNum.length; key++) {
+    if (arrayNum[key] % 2 == 0) {
+        arrayNumOfEvenNumbers.push(arrayNum[key]);
+    }
+}
+arrayNumOfEvenNumbers = arrayNumOfEvenNumbers.sort((a, b) => b - a);
+console.log(arrayNumOfEvenNumbers);
+
+Шестой билет
+const users = [
+    { name: "Анна", age: 25, isActive: true },
+    { name: "Петр", age: 30, isActive: false },
+    { name: "Мария", age: 22, isActive: true },
+    { name: "Иван", age: 35, isActive: true },
+    
+]
+let activeUsers = users.filter(user => user.isActive);
+console.log(activeUsers.length);
+
+7 билет
+
+const data = {
+    user: {
+        name: 'John',
+        email: 'john@example.com',
+        password: 'password@example.com'
+    },
+    settings: {
+        language: 'en',
+        country: 'USA',
+        theme: 'dark'
+    }
+}
+for (const key in data) {
+    console.log(data[key]);
+}
+
+8 билет
+const numArray = [1, 2, 3, 4, 5,11];
+let sum = 0;
+for (let i = 0; i < numArray.length; i++) {
+    if(numArray[i] % 2 !== 0){
+        sum += numArray[i] * numArray[i];
+    }
+}
+
+
+
+
+
+
+
+
+
+9 билет
+const students = [
+    { name: "Иван", mark: 4 },
+    { name: "Марияяя", mark: 5 },
+    { name: "Петряя", mark: 3 },
+    { name: "Анна", mark: 4 }
+];
+let studentsNameMoreThanFive  = students.filter(student => student.name.length > 5);
+
+
+
+10 билет
+const array = [
+    {mark:5},
+    {mark:2},
+    {mark:3},
+    {mark:4},
+    {mark:5},
+    {mark:2}
+];
+
+let sum = 0;
+for (let item of array) {
+    sum += item.mark;
+}
+console.log(sum/array.length);
+
+11 билет
+
+const sortArrayOfAge = (array) => {
+    return array.sort((a,b) => b.age - a.age);
+}
+let testArray =[
+    {age:21, name:"Alex"},
+    {age:2, name:"Sam"},
+    {age:3, name:"Kenny"},
+    {age:12312, name:"Kenny2"},
+    {age:312312, name:"Kenny3"}
+]
+console.log(sortArrayOfAge(testArray));
+
+Билет 12
+const strings = ["яблоко", "банан", "яблоко", "груша", "банан", "киви"];
+let result = [];
+for(item of strings) {
+    if(!result.includes(item)){
+        result.push(item);
+    }
+}
+console.log(result);
+
+билет 13
+
+const orders = [
+    { id: 1, amount: 250 },
+    { id: 2, amount: 450 },
+    { id: 3, amount: 130 },
+    { id: 4, amount: 670 }
+];
+
+const totalSum = orders.reduce((sum, order) => {
+    return sum += order.amount;
+}, 0);
+
+
+
+
+
+
+
+
+
+Билет 14
+
+const users = [
+    { name: "Анна", age: 25 },
+    { name: "Петр", age: 30 },
+    { name: "Мария", age: 25 },
+    { name: "Иван", age: 30 },
+    { name: "Олег", age: 40 }
+];
+const result = [];
+for (let user of users) {
+    let age = user.age;
+    if(!result[age]){
+        result[age] = [];
+    }
+    result[age].push(user);
+}
+
+билет 15
+
+let result = [];
+let x = 0;
+while(result.length < 10){
+    result.push(x+1);
+    x+=2;
+}
+console.log(result);
+
+билет 16
+
+const words = ["Привет", "мир", "как", "дела"];
+const result = words.join("|");
+console.log(result);
+
+билет 17
+
+const IsPalindrom = (str) => {
+    if (str.toLowerCase() === str.toLowerCase().split("").reverse().join("")) {
+        return true;
+    }else return false;
+}
+
+билет 18
+
+const car = {
+    start: function () {
+        console.log("Start");
+    },
+    stop: function () {
+        console.log("Stop");
+    }
+}
+car.start();
+car.stop();
+
+
+
+
+Билет 19
+
+
+const testobject = {
+    A: { x: 1,  y: 2 },
+    B: { x: -1, y: 5 },
+    C: { x: 2,  y: -3 },
+    D: { x: 0,  y: 0 }
+};
+
+let minSum = Infinity;
+let minPoint = "";
+for (let item in testobject) {
+    const point = testobject[item];
+    const sum = point.x + point.y;
+    if(sum < minSum) {
+        minPoint = item;
+        minSum = sum;
+    }
+}
+
+билет 20
+
+const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const oddNums = [];
+const evenNums = [];
+
+for (let i in nums) {
+    if (nums[i] % 2 === 0){
+        evenNums.push(nums[i]);
+    } else oddNums.push(nums[i]);
+}
+
+билет 21
+
+const reverseStr = (str) => {
+    return str.split("").reverse().join("");
+};
+
+билет 22 
+
+const str = ["яблоко", 'ананас', "автомобиль", "машина", "человек"];
+const strStartA = [];
+for (let item of str) {
+    const splitedWord = item.split("");
+    if(splitedWord[0] === "а") {
+        strStartA.push(splitedWord.join(""));
+    }
+}
+
+билет 23
+
+const str = ["кот", "машина", "привет", "я"]; // исходный массив
+const strLength = [];
+
+str.forEach(item => {
+    strLength.push(item.length);
+})
+console.log(strLength);
+
+
+билет 24
+const nums = [-323, 12312, 0, 1, 2, 3, 4, 5, -10, -23];
+const result=[];
+for (item of nums) {
+    if(item > 0){
+        result.push(item);
+    }
+}
+
+билет 25
+
+const nums = [-323, 12312, 0, 1, 2, 3, 4, 5, -10, -23, 0,1,2,3];
+const numsNotRepeated = [];
+for (item of nums) {
+    if(!numsNotRepeated.includes(item)) {
+        numsNotRepeated.push(item);
+    }
+}
+const repeatedEl = nums.length - numsNotRepeated.length;
+console.log(repeatedEl);
+
+билет 26
+
+const rates = {
+    USD:90,
+    EUR:98,
+    GBP:115
+}
+const result = [];
+for(let key in rates){
+    const rate = rates[key];
+    result.push(`${key}: ${rate}`);
+}
+
+билет 27
+
+let x = 1/"слово";
+const testArray = [ 0, 1 , "", false, undefined, "12312ц", x];
+const result =[]
+
+for(item of testArray){
+    if(item){
+        result.push(item);
+    }
+}
+
+
+Билет 28 – похуй не попадется
+
+Билет 29
+function getDuplicates(array) {
+    const result = [];
+    array.forEach((item, index) => {
+        if (array.indexOf(item) !== index && !result.includes(item)) {
+            result.push(item);
+        }
+    });
+
+    return result;
+}
+
+
+Билет 30
+
+Let result = nums
+    .filter(num => num % 2 === 0)
+    .map(num => num * num)
+    .reduce((sum,curr) =>  sum + curr);
+console.log(result);
+
+
     </script>
 </body>
 </html>
